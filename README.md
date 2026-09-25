@@ -1,6 +1,6 @@
 # Solar Supply Prediction
 
-A Flask and JavaScript dashboard for exploring historical solar generation data from two plants. It trains Random Forest models for power and yield values, exposes results through a Flask API, and displays charts and trends in the browser.
+A Flask and JavaScript dashboard for exploring historical solar generation data from two plants. The backend trains Random Forest models for power and yield values, exposes results through a Flask API, and displays charts and trends in the browser.
 
 ## Features
 
@@ -11,33 +11,63 @@ A Flask and JavaScript dashboard for exploring historical solar generation data 
 
 ## Project Architecture
 
-The project has three main layers:
+The application loads the historical plant data, prepares model features, serves predictions and summaries through Flask, and presents the results in a browser dashboard.
 
-1. **Data:** Two CSV files in `BACKEND/` provide the historical generation records.
-2. **Backend and API:** `BACKEND/main.py` loads and combines the data, prepares model features, trains Random Forest regressors, and serves JSON through Flask routes.
-3. **Frontend:** Pages and scripts in `FRONTEND/` request API data from the local Flask server and display it in dashboard charts and summaries.
-
-```mermaid
-flowchart LR
-    P1[Plant 1 CSV] --> Flask[Flask backend<br/>BACKEND/main.py]
-    P2[Plant 2 CSV] --> Flask
-    Flask --> Prep[Pandas data preparation<br/>and derived features]
-    Prep --> Models[Random Forest models<br/>DC, AC, daily yield, total yield]
-    Models --> Routes[Flask JSON API routes]
-    Browser[Browser dashboard<br/>FRONTEND pages and script.js] -->|HTTP fetch to localhost:5000| Routes
-    Routes --> Browser
-    Browser --> Charts[Dashboard values and Chart.js charts]
+```text
+┌──────────────────────────────────────────────┐
+│ Plant generation data                        │
+│ Plant_1_Generation_Data.csv + Plant_2_...csv │
+└──────────────────────┬───────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────┐
+│ Data loading and preparation                 │
+│ BACKEND/main.py · pandas · NumPy              │
+└──────────────────────┬───────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────┐
+│ Random Forest prediction models              │
+│ DC power · AC power · daily yield · total    │
+└──────────────────────┬───────────────────────┘
+                       ▼
+┌──────────────────────────────────────────────┐
+│ Flask API                                     │
+│ BACKEND/main.py · JSON endpoints              │
+└──────────────────────┬───────────────────────┘
+                       ↕ HTTP / JSON
+┌──────────────────────────────────────────────┐
+│ Browser dashboard                             │
+│ FRONTEND HTML · script.js · Chart.js          │
+└──────────────────────────────────────────────┘
 ```
 
-At startup, the backend reads the CSV files and trains the models. The frontend then calls routes such as `/prediction`, `/yearly/dc`, and `/comparison` to populate the dashboard.
+## Project Structure
 
-## Project structure
+```text
+SolarSupplyPrediction/
+├── BACKEND/
+│   ├── main.py                       # Flask API, data processing, and prediction models
+│   ├── Plant_1_Generation_Data.csv   # Historical generation data for plant 1
+│   └── Plant_2_Generation_Data.csv   # Historical generation data for plant 2
+├── FRONTEND/
+│   ├── frontpage.html                # Landing page
+│   ├── index.html                    # Main dashboard
+│   ├── about.html                    # Project information page
+│   ├── script.js                     # API calls, dashboard behavior, and charts
+│   ├── style.css                     # Page layout, styling, and themes
+│   └── logo.jpg                      # Project logo
+├── SOLAR POWER/                      # Earlier uploaded copy of the project files
+│   ├── BACKEND/                      # Duplicate backend files and data
+│   ├── FRONTEND/                     # Duplicate frontend files and assets
+│   └── TODO.md                       # Earlier project notes
+├── README.md                         # Project overview and setup instructions
+└── TODO.md                           # Project tasks and notes
+```
 
-`BACKEND/` contains the Flask application and the two plant generation CSV files. `FRONTEND/` contains the landing page, dashboard, project information page, styles, scripts, and logo.
+The top-level `BACKEND/` and `FRONTEND/` folders are the current project layout. `SOLAR POWER/` is an earlier uploaded copy retained in the repository.
 
 ## Requirements
 
-Python 3.10 or newer is recommended. From the repository root, create and activate a virtual environment, then install the backend packages:
+Python 3.10 or newer. Install the backend packages from the project folder:
 
 ```powershell
 python -m venv .venv
@@ -45,24 +75,20 @@ python -m venv .venv
 python -m pip install Flask Flask-Cors matplotlib numpy pandas scikit-learn
 ```
 
-## Run locally
+## Run Locally
 
-Start the Flask backend from the repository root:
+Start the backend from the repository root:
 
 ```powershell
 python BACKEND/main.py
 ```
 
-The API runs at `http://localhost:5000`. Keep that terminal open, then open `FRONTEND/frontpage.html` in a browser and navigate to the dashboard. The frontend calls the backend at `http://localhost:5000`.
+The API runs at `http://localhost:5000`. Open `FRONTEND/frontpage.html` in a browser to begin, then use the dashboard to view predictions and charts.
 
-## API routes
+## API Routes
 
-- `/prediction` — sample predictions and the 2030 growth estimate
-- `/yearly/dc`, `/yearly/ac`, `/yearly/daily`, `/yearly/total` — yearly averages
-- `/comparison` — average metrics for both plants
-- `/future/dc`, `/future/ac`, `/future/daily`, `/future/total` — projected values
-- `/trends` — annual growth estimates and trend labels
+The Flask backend provides routes for predictions, yearly summaries, plant comparisons, and growth projections. See `BACKEND/main.py` for the current route names and request formats.
 
 ## Notes
 
-The backend derives temperature and irradiation features from power values as placeholders. Long-term growth rates and prediction inputs are illustrative, so projections should not be treated as operational forecasts. The models train when the backend starts.
+Some projection values are illustrative estimates based on the available historical data and model assumptions. They should not be treated as guaranteed future generation.
