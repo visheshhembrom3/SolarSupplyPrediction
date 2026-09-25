@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Solar Power Analysis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f7f9fc;
+            font-family: Arial, sans-serif;
+            color: #222;
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+        body.dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 1s ease-out;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            animation: fadeInUp 1s ease-out;
+            animation-delay: 0.5s;
+            animation-fill-mode: both;
+        }
+        body.dark-mode .section {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        .back-btn {
+            display: block;
+            margin: 20px auto;
+            background: #003366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .back-btn:hover {
+            background: #004080;
+        }
+        body.dark-mode .back-btn {
+            background: #333;
+        }
+        body.dark-mode .back-btn:hover {
+            background: #555;
+        }
+        #dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+        #dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        body.dark-mode #dark-mode-toggle {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        body.dark-mode #dark-mode-toggle:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+    <div class="container">
+        <h1>About the Solar Power Prediction Website</h1>
+        <div class="section">
+            <p>This Application is designed for educational, analytical, and research-oriented use.</p>
+            <p>It provides solar power predictions using machine learning models trained on two datasets. The datasets used in this project are for demonstration and academic purposes only.</p>
+        </div>
+        <div class="section">
+            <p>The user acknowledges that the predictions depend heavily on the quality, scope, and limitations of the provided datasets.</p>
+        </div>
+        <div class="section">
+            <p>The Application itself does not collect, store, or sell personal data. While this Application uses machine learning models to estimate future solar performance, the predictions are:</p>
+            <ul>
+                <li>approximations,</li>
+                <li>based on historical data,</li>
+                <li>influenced by synthetic or assumed environmental variables,</li>
+                <li>not guaranteed to be correct or reliable.</li>
+            </ul>
+            <p>By using the Application, you acknowledge that all predictions are informational, not factual.</p>
+        </div>
+        <div class="section">
+            <p>The Application may be updated, modified, suspended, or discontinued at any time without prior notice.</p>
+        </div>
+        <button class="back-btn" onclick="window.location.href='frontpage.html'">Back to Front Page</button>
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        // Load dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggleButton.textContent = '☀️';
+        }
+
+        // Toggle dark mode
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            toggleButton.textContent = isDark ? '☀️' : '🌙';
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2023 Solar Power Analysis Dashboard. All rights reserved. | <a href="#" target="_blank">Terms of Condition</a> | <a href="#" target="_blank">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

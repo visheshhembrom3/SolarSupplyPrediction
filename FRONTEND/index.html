@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Power Analysis Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Solar Power Analysis Dashboard</h1>
+        <button id="dark-mode-toggle" title="Toggle Dark Mode">🌙</button>
+    </header>
+
+    <div class="container">
+    <nav>
+        <button id="btn-overview" data-target="overview">Data Overview</button>
+        <button id="btn-prediction" data-target="prediction">Future Prediction</button>
+        <button id="btn-dc-chart" data-target="dc-chart">DC Power Chart</button>
+        <button id="btn-ac-chart" data-target="ac-chart">AC Power Chart</button>
+        <button id="btn-daily-chart" data-target="daily-chart">Daily Yield Chart</button>
+        <button id="btn-total-chart" data-target="total-chart">Total Yield Chart</button>
+        <button id="btn-future-dc-chart" data-target="future-dc-chart">Future DC Chart</button>
+        <button id="btn-future-ac-chart" data-target="future-ac-chart">Future AC Chart</button>
+        <button id="btn-future-daily-chart" data-target="future-daily-chart">Future Daily Chart</button>
+        <button id="btn-future-total-chart" data-target="future-total-chart">Future Total Chart</button>
+        <button id="btn-comparison" data-target="comparison">Plant Comparison</button>
+        <button id="btn-trends" data-target="trends">Long-term Trends</button>
+    </nav>
+
+    <main>
+
+        <section id="overview" class="active">
+            <h2>Data Overview</h2>
+            <p>This project uses two CSV datasets containing historical operational data from a solar power plant. Together, these datasets capture the daily behavior, efficiency, and performance patterns of the plant. The data includes electrical measurements, environmental factors, and calculated yield metrics essential for understanding and forecasting solar output.</p>
+            <h3>Key Features in the Dataset</h3>
+            <ul>
+                <li><strong>DC Power (kW)</strong><br>Raw power generated directly by the solar panels.</li>
+                <li><strong>AC Power (kW)</strong><br>Usable electrical output after inversion, representing actual deliverable energy.</li>
+                <li><strong>Module Yield / Average Yield</strong><br>Indicates how efficiently the modules convert sunlight into energy.</li>
+                <li><strong>Total Yield</strong><br>Cumulative energy generated over time, used to analyze long-term trends.</li>
+                <li><strong>Environmental or Time-Based Columns</strong></li>
+            </ul>
+        </section>
+
+        <section id="prediction">
+            <h2>Future Prediction</h2>
+            <p>Predicted Future DC Power: <span id="predicted-dc">Loading...</span></p>
+            <p>Predicted Future AC Power: <span id="predicted-ac">Loading...</span></p>
+            <p>Predicted Future Daily Yield: <span id="predicted-daily">Loading...</span></p>
+            <p>Predicted Future Total Yield: <span id="predicted-total">Loading...</span></p>
+            <p>Growth percentage by 2030: <span id="growth-2030">Loading...</span>%</p>
+        </section>
+
+        <section id="dc-chart">
+            <h2>Yearly Average DC Power</h2>
+            <canvas id="dcPowerChart"></canvas>
+        </section>
+
+        <section id="ac-chart">
+            <h2>Yearly Average AC Power</h2>
+            <canvas id="acPowerChart"></canvas>
+        </section>
+
+        <section id="daily-chart">
+            <h2>Yearly Average Daily Yield</h2>
+            <canvas id="dailyYieldChart"></canvas>
+        </section>
+
+        <section id="total-chart">
+            <h2>Yearly Average Total Yield</h2>
+            <canvas id="totalYieldChart"></canvas>
+        </section>
+
+        <section id="future-dc-chart">
+            <h2>Projected Future DC Power (2025-2030)</h2>
+            <canvas id="futureDcChart"></canvas>
+        </section>
+
+        <section id="future-ac-chart">
+            <h2>Projected Future AC Power (2025-2030)</h2>
+            <canvas id="futureAcChart"></canvas>
+        </section>
+
+        <section id="future-daily-chart">
+            <h2>Projected Future Daily Yield (2025-2030)</h2>
+            <canvas id="futureDailyChart"></canvas>
+        </section>
+
+        <section id="future-total-chart">
+            <h2>Projected Future Total Yield (2025-2030)</h2>
+            <canvas id="futureTotalChart"></canvas>
+        </section>
+
+        <section id="comparison">
+            <h2>Plant Comparison</h2>
+            <canvas id="comparisonChart"></canvas>
+        </section>
+
+        <section id="trends">
+            <h2>Long-term Trend (2025–2030)</h2>
+            <table id="trendTable">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Estimated Mean DC Power Growth (%)</th>
+                        <th>Estimated Mean AC Power Growth (%)</th>
+                        <th>Trend</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        </main>
+
+        <button class="back-btn" onclick="window.location.href='frontpage.html'">Back</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Solar Power Analysis Dashboard. All rights reserved. | <a href="#" target="_blank">Terms of Condition</a> | <a href="#" target="_blank">Privacy Policy</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

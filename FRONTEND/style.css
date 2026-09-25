@@ -1,0 +1,242 @@
+/* GENERAL PAGE LAYOUT */
+body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fc;
+    font-family: Arial, sans-serif;
+    color: #222;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+/* HEADER */
+header {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+body.dark-mode header {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+}
+
+/* NAVIGATION BAR */
+nav {
+    width: 200px;
+    background: #004080;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode nav {
+    background: #1e1e1e;
+}
+
+nav button {
+    background: white;
+    color: #222;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+    width: 100%;
+    transform: translateX(0);
+}
+
+nav button:hover {
+    background: #ffcc00;
+    transform: translateX(10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+body.dark-mode nav button {
+    background: #333;
+    color: #e0e0e0;
+}
+
+body.dark-mode nav button:hover {
+    background: #555;
+}
+
+/* SECTIONS */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+section {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+section.active {
+    display: block;
+}
+
+body.dark-mode section {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-mode section h2 {
+    color: #e0e0e0;
+}
+
+body.dark-mode section p {
+    color: #e0e0e0;
+}
+
+body.dark-mode section span {
+    color: #e0e0e0;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+table th {
+    background: #003366;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background: #f0f4fa;
+}
+
+body.dark-mode table th, body.dark-mode table td {
+    border-color: #555;
+}
+
+body.dark-mode table th {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+body.dark-mode table tr:nth-child(even) {
+    background: #333;
+}
+
+/* CHART */
+canvas {
+    margin-top: 20px;
+    width: 80%;
+    height: 200px;
+}
+
+/* DARK MODE TOGGLE BUTTON */
+#dark-mode-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+#dark-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode #dark-mode-toggle {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode #dark-mode-toggle:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* BACK BUTTON */
+.back-btn {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: #003366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background: #004080;
+}
+
+body.dark-mode .back-btn {
+    background: #333;
+}
+
+body.dark-mode .back-btn:hover {
+    background: #555;
+}
+
+/* FOOTER */
+footer {
+    background: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+body.dark-mode footer {
+    background: #1e1e1e;
+    color: #e0e0e0;
+}
+
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+body.dark-mode footer a {
+    color: #ffcc00;
+}
