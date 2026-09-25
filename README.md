@@ -9,6 +9,28 @@ A Flask and JavaScript dashboard for exploring historical solar generation data 
 - Displays illustrative projections and growth trends through 2030.
 - Provides a browser dashboard with light and dark themes.
 
+## Project Architecture
+
+The project has three main layers:
+
+1. **Data:** Two CSV files in `BACKEND/` provide the historical generation records.
+2. **Backend and API:** `BACKEND/main.py` loads and combines the data, prepares model features, trains Random Forest regressors, and serves JSON through Flask routes.
+3. **Frontend:** Pages and scripts in `FRONTEND/` request API data from the local Flask server and display it in dashboard charts and summaries.
+
+```mermaid
+flowchart LR
+    P1[Plant 1 CSV] --> Flask[Flask backend<br/>BACKEND/main.py]
+    P2[Plant 2 CSV] --> Flask
+    Flask --> Prep[Pandas data preparation<br/>and derived features]
+    Prep --> Models[Random Forest models<br/>DC, AC, daily yield, total yield]
+    Models --> Routes[Flask JSON API routes]
+    Browser[Browser dashboard<br/>FRONTEND pages and script.js] -->|HTTP fetch to localhost:5000| Routes
+    Routes --> Browser
+    Browser --> Charts[Dashboard values and Chart.js charts]
+```
+
+At startup, the backend reads the CSV files and trains the models. The frontend then calls routes such as `/prediction`, `/yearly/dc`, and `/comparison` to populate the dashboard.
+
 ## Project structure
 
 `BACKEND/` contains the Flask application and the two plant generation CSV files. `FRONTEND/` contains the landing page, dashboard, project information page, styles, scripts, and logo.
